@@ -1,0 +1,43 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<logkit logger="system.logkit" log-level="INFO" manager-class="org.apache.avalon.excalibur.logger.LogKitLoggerManager">
+<!--
+    The manager-class is what determines the underlying log implementation
+    In this case, it is Avalon LogKit.
+    Not sure what logger and log-level are for.
+-->
+
+    <factories>
+      <factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
+    </factories>
+
+    <targets>
+      <!-- Sample entry showing custom format -->
+      <file id="logFile" >
+         <append>false</append>
+         <filename>format.log</filename>
+         <format type="pattern">%{time:yyyy-MM-dd HH:mm:ss} PRI: %5.5{priority} CAT: %{category} TEXT: %{message} EX: %{throwable}\n</format>
+      </file>
+    </targets>
+
+    <categories>
+      <category name="" log-level="INFO">
+        <log-target id-ref="logFile"/>
+      </category>
+    </categories>
+</logkit>
